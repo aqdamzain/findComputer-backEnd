@@ -5,11 +5,17 @@
 * [Create and Manage User](#create-and-manage-user)
   * POST user/register
   * POST user/login
-  * POST user/update
-  * POST user/updatePassword
+  * PUT user/update
+  * PUT user/updatePassword
 * [Create and Manage Item](#create-and-manage-item)
-  
-
+  * GET item
+  * POST item/insert
+  * GET item/{id}
+  * POST item/user
+  * DELETE item/{id}/delete
+  * POST item/{id}/buy
+  * POST item/buy/user
+  * POST item/search
 
 ## Create and Manage User
 
@@ -78,7 +84,7 @@ example: PUT /user/updatePassword?tokenId=value&oldPw=value&newPw=value
 will return string value of "success" or "failed"
 
 
-## Create and Manage User
+## Create and Manage item
 
 ### GET item
 get all items available
@@ -275,7 +281,7 @@ response body:
 ]
 ```
 
-### POST item//search
+### POST item/search
 get item by the category.  
 take parameters of
 * category : String value of item category
