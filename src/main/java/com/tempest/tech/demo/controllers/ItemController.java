@@ -61,12 +61,12 @@ public class ItemController {
         }
     }
 
-    @RequestMapping("buy/user")
+    @RequestMapping(value = "buy/user", method = RequestMethod.POST)
     public ArrayList<ItemLog> getBuyHistoryByUser(@RequestParam(value = "tokenId") String tokenId){
         return DatabaseItem.getBuyHistoryByUser(tokenId);
     }
 
-    @RequestMapping("/search")
+    @RequestMapping(value = "/search", method = RequestMethod.POST)
     public ArrayList<Item> getItemsByCategory(@RequestParam(value = "category") String category){
         return DatabaseItem.searchByCategory(category);
     }

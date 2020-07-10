@@ -46,7 +46,7 @@ cd8c1eb8fd296ef41eb3c49b958c32acbd****
 ```
 
 ### PUT user/update
-Make update the name, address, profile image of the user.
+Make update the name, address, profile image of the user.  
 take parameters of
 * tokenId : String value of user authentication token.
 * name : String value of user name.
@@ -80,6 +80,12 @@ will return string value of "success" or "failed"
 
 ## Create and Manage User
 
+### GET item
+get all items available
+```sh
+example: GET /item
+```
+
 ### POST item/insert
 take parameters of
 * tokenId : String value of user authentication token.
@@ -108,4 +114,191 @@ response body:
         "profileImg": "owner profile image"
     }
 }
+```
+
+### GET item/{id}
+take parameters of
+* id : String value of id of the item.
+```sh
+example: GET /item/efa59eed958e7c315ba376368a67745754****
+```
+will return item information
+```sh
+response body:
+{
+    "id": "efa59eed958e7c315ba376368a6774575****",
+    "name": "item 1",
+    "description": "item description",
+    "category": "storage",
+    "price": 2000.0,
+    "itemImg": "http://www.item-image.com",
+    "owner": {
+        "id": "552b74851ef4d235206a34c8317cbfabe1c5fd21",
+        "name": "owner name",
+        "address": "owner address",
+        "profileImg": null
+    }
+}
+```
+
+### POST item/user
+get all items owned by user.  
+take parameters of
+* tokenId : String value of user authentication token.
+```sh
+example: POST /item/user?tokenId=value
+```
+will return items owned by user
+```sh
+response body:
+[
+    {
+        "id": "efa59eed958e7c315ba376368a6774575****",
+        "name": "item 1",
+        "description": "item description",
+        "category": "storage",
+        "price": 2000.0,
+        "itemImg": "http://www.item-image.com",
+        "owner": {
+            "id": "552b74851ef4d235206a34c8317cbfabe1c5fd21",
+            "name": "owner name",
+            "address": "owner address",
+            "profileImg": null
+        }
+    },
+    {
+        "id": "375d11ed2af99b0324e32acca733ebc15****",
+        "name": "item 2",
+        "description": "item description",
+        "category": "Processor",
+        "price": 2000.0,
+        "itemImg": "http://www.item-image.com",
+        "owner": {
+            "id": "552b74851ef4d235206a34c8317cbfabe1c5fd21",
+            "name": "Owner name",
+            "address": "owner address",
+            "profileImg": null
+        }
+    }
+]
+```
+
+### DELETE item/{id}/delete
+delete item from from availability.  
+take parameters of
+* id : String value of id of the item.
+* tokenId : String value of user authentication token.
+```sh
+example: DELETE /item/efa59eed958e7c315ba376368a6774575****/delete
+```
+will return information about removed item
+```sh
+response body:
+{
+    "id": "efa59eed958e7c315ba376368a6774575****",
+    "name": "item 1",
+    "description": "item description",
+    "category": "storage",
+    "price": 2000.0,
+    "itemImg": "http://www.item-image.com",
+    "owner": {
+        "id": "552b74851ef4d235206a34c8317cbfabe1c5fd21",
+        "name": "owner name",
+        "address": "owner address",
+        "profileImg": null
+    }
+}
+```
+
+### POST item/{id}/buy
+enter the item in the user's purchase list and then delete the item from availability.  
+take parameters of
+* id : String value of id of the item.
+* tokenId : String value of user authentication token.
+```sh
+example: POST /item/efa59eed958e7c315ba376368a6774575****/buy?tokenId=value
+```
+will return item information bought by user
+```sh
+{
+    "id": "efa59eed958e7c315ba376368a6774575****",
+    "name": "item 1",
+    "description": "item description",
+    "category": "storage",
+    "price": 2000.0,
+    "itemImg": "http://www.item-image.com",
+    "owner": {
+        "id": "552b74851ef4d235206a34c8317cbfabe1c5fd21",
+        "name": "owner name",
+        "address": "owner address",
+        "profileImg": null
+    },
+    "buyer": {
+        "id": "59c4cf91374e21fee2fe2018be6a28dd****",
+        "name": "buyer name",
+        "address": null,
+        "profileImg": null
+    }
+}
+```
+
+### POST item/buy/user
+get all item bought by user.  
+take parameters of
+* tokenId : String value of user authentication token.
+```sh
+example: POST /item/efa59eed958e7c315ba376368a6774575****/buy/user?tokenId=value
+```
+```sh
+response body:
+[
+    {
+        "id": "efa59eed958e7c315ba376368a6774575****",
+        "name": "item 1",
+        "description": "item description",
+        "category": "storage",
+        "price": 2000.0,
+        "itemImg": "http://www.item-image.com",
+        "owner": {
+            "id": "552b74851ef4d235206a34c8317cbfabe1c5fd21",
+            "name": "owner name",
+            "address": "owner address",
+            "profileImg": null
+        },
+        "buyer": {
+            "id": "59c4cf91374e21fee2fe2018be6a28dd****",
+            "name": "buyer name",
+            "address": null,
+            "profileImg": null
+        }
+    }
+]
+```
+
+### POST item//search
+get item by the category.  
+take parameters of
+* category : String value of item category
+```sh
+example: POST /item/search?category=value
+```
+will return information of all items in the same category
+```sh
+response body:
+[
+    {
+        "id": "375d11ed2af99b0324e32acca733ebc15****",
+        "name": "item 2",
+        "description": "item description",
+        "category": "Processor",
+        "price": 2000.0,
+        "itemImg": "http://www.item-image.com",
+        "owner": {
+            "id": "552b74851ef4d235206a34c8317cbfabe1c5fd21",
+            "name": "Owner name",
+            "address": "owner address",
+            "profileImg": null
+        }
+    }
+]
 ```
