@@ -1,18 +1,14 @@
 package com.tempest.tech.demo.models;
 
-public class User {
+public class UserProfile {
     private final String id;
-    private final String email;
-    private String password;
     private String name;
     private String address;
     private String profileImg;
 
-    public User(String id, String name, String email, String password) {
+    public UserProfile(String id, String name) {
         this.id = id;
         this.name = name;
-        this.password = password;
-        this.email = email;
     }
 
     public String getId() {
@@ -21,14 +17,6 @@ public class User {
 
     public String getName() {
         return name;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public String getEmail() {
-        return email;
     }
 
     public String getAddress() {
@@ -41,10 +29,6 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public void setAddress(String address) {
