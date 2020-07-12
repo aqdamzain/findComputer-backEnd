@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.InetAddress;
 import java.util.ArrayList;
@@ -53,7 +54,8 @@ public class ItemController {
         storageService.store(imgFile);
         try {
             return DatabaseItem.addItem(name, description, category, price,
-                    InetAddress.getLoopbackAddress().getHostName()+"/item/files/"+ imgFile.getOriginalFilename(),
+                    ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString()
+                            +"/item/files/"+ imgFile.getOriginalFilename(),
                     DatabaseUser.getUser(tokenId));
         } catch (UserNotFoundException e) {
             return null;
