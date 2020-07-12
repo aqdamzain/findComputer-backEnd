@@ -72,10 +72,8 @@ public class DatabaseUser {
                     return fUser;
                 }
             }
-        } else {
-            throw new UserNotFoundException(authId);
         }
-        return null;
+        throw new UserNotFoundException(authId);
     }
 
     public static UserProfile changeProfileInfo(String authId, String name, String address, String profileImg){

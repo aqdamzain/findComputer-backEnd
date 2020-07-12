@@ -49,8 +49,8 @@ public class ItemController {
                                 @RequestParam(value = "price") double price,
                                 @RequestParam(value = "file") MultipartFile imgFile)
     {
-        storageService.store(imgFile);
         try {
+            storageService.store(imgFile);
             return DatabaseItem.addItem(name, description, category, price,
                     ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString()
                             +"/item/files/"+ imgFile.getOriginalFilename(),
