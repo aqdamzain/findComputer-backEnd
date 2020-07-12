@@ -1,33 +1,29 @@
 package com.tempest.tech.demo;
 
+import com.tempest.tech.demo.models.User;
+import com.tempest.tech.demo.models.UserProfile;
+import com.tempest.tech.demo.services.DatabaseUser;
+import com.tempest.tech.demo.utils.EmailAlreadyExistsException;
 import com.tempest.tech.demo.utils.RandomId;
+import com.tempest.tech.demo.utils.UserNotFoundException;
 
 import java.util.ArrayList;
 
 public class testMain {
     public static void main(String[] args) {
-        class Test{
-            final int a;
-            Test(int a){
-                this.a = a;
-            }
-            int getA(){
-                return this.a;
-            }
+        try {
+            UserProfile newUser = DatabaseUser.addUser("Aqdam Zain", "aqdamzh@gmail.com", "1234");
+            System.out.println(newUser.getId());
+        } catch (EmailAlreadyExistsException e) {
+            e.printStackTrace();
         }
-        ArrayList<Test> testArr = new ArrayList<>();
-        testArr.add(new Test(2));testArr.add(new Test(2));testArr.add(new Test(23));
-        testArr.add(new Test(2));testArr.add(new Test(2));
 
-        boolean testVar = false;
-        for (Test test : testArr) {
-            System.out.println(test.getA());
-            if(test.getA()==23){
-                testVar = true;
-                break;
-            }
+        try {
+            User loginResponse = DatabaseUser.userLogin("aqdamzh@gmail.com", "1234");
+            System.out.println(loginResponse.getTokenId());
+        } catch (UserNotFoundException e) {
+            e.printStackTrace();
         }
-        System.out.println(testVar);
     }
 
     private static String bytesToHex(byte[] digest) {

@@ -1,13 +1,13 @@
 package com.tempest.tech.demo.models;
 
 public class Item {
-    private String id;
-    private String name;
+    private final String id;
+    private final String name;
     private String description;
     private String category;
     private double price;
     private String itemImg;
-    private UserProfile owner;
+    private final UserProfile owner;
 
     public Item(String id, String name, String description, String category, double price, String itemImg, UserProfile owner) {
         this.id = id;

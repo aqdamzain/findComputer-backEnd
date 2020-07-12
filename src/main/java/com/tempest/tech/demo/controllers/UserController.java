@@ -1,16 +1,16 @@
 package com.tempest.tech.demo.controllers;
 
+import com.tempest.tech.demo.models.User;
 import com.tempest.tech.demo.models.UserProfile;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import com.tempest.tech.demo.utils.UserNotFoundException;
+import org.springframework.web.bind.annotation.*;
 
 import com.tempest.tech.demo.services.DatabaseUser;
 import com.tempest.tech.demo.utils.EmailAlreadyExistsException;
 
 import java.util.ArrayList;
 
+@CrossOrigin
 @RequestMapping("/user")
 @RestController
 public class UserController {
@@ -33,10 +33,15 @@ public class UserController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String loginUser(@RequestParam(value="email") String email,
-                                  @RequestParam(value="password") String password)
+    public User loginUser(@RequestParam(value="email") String email,
+                          @RequestParam(value="password") String password)
     {
-        return DatabaseUser.userLogin(email, password);
+        try {
+            return DatabaseUser.userLogin(email, password);
+        } catch (UserNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.PUT)

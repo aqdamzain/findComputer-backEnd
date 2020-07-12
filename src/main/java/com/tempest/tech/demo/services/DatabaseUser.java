@@ -1,5 +1,6 @@
 package com.tempest.tech.demo.services;
 
+import com.tempest.tech.demo.models.User;
 import com.tempest.tech.demo.models.UserAuth;
 import com.tempest.tech.demo.models.UserProfile;
 import com.tempest.tech.demo.utils.EmailAlreadyExistsException;
@@ -56,11 +57,12 @@ public class DatabaseUser {
         }
     }
 
-    public static String userLogin(String email, String password) {
+    public static User userLogin(String email, String password) throws UserNotFoundException {
         if(!DB_USER_AUTH.isEmpty()){
             for (UserAuth fAuth: DB_USER_AUTH){
                 if(fAuth.getEmail().equals(email) && fAuth.getPassword().equals(password)){
-                    return fAuth.getAuthId();
+
+                    return new User(fAuth.getAuthId(), getUser(fAuth.getAuthId()));
                 }
             }
         }
