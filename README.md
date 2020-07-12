@@ -48,7 +48,15 @@ example: POST /user/login?email=value&password=value
 will return authentication token for user
 ```sh
 response body:
-cd8c1eb8fd296ef41eb3c49b958c32acbd****
+{
+    "tokenId": "30d860838fd73ca0c32d92656917867e6****",
+    "data": {
+        "id": "c8169c655d50326aef606a24814e95301a8e**",
+        "name": "Name",
+        "address": null,
+        "profileImg": null
+    }
+}
 ```
 
 ### PUT user/update
@@ -57,9 +65,14 @@ take parameters of
 * tokenId : String value of user authentication token.
 * name : String value of user name.
 * address : String value of user address.
-* profileImg: reference link of user profile image.
+* profileImg: image file of the user.
 ```sh
-example: PUT /user/update?tokenId=value&name=value&address=value&profileImg=value
+example: PUT /user/update
+form-data,
+tokenId: text
+name: text
+address: text
+file: file
 ```
 will return profile of the user
 ```sh
@@ -99,9 +112,16 @@ take parameters of
 * desc : String value of item description.
 * category : String value of item category.
 * price : double value of item price.
-* itemImg : reference link of item image.
+* itemImg : image file of item.
 ```sh
-example: POST /item/insert?tokenId=value&name=value&desc=value&category=value&price=value&itemImg=value
+example: POST /item/insert
+form-data,
+tokenId: text
+name: text
+desc: text
+category: text
+price: text
+file: file
 ```
 Will return information about item
 ```sh
