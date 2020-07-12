@@ -18,6 +18,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.InetAddress;
 import java.util.ArrayList;
 
+@CrossOrigin
 @RequestMapping("/item")
 @RestController
 public class ItemController {
