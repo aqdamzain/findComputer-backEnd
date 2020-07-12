@@ -53,7 +53,7 @@ public class ItemController {
         storageService.store(imgFile);
         try {
             return DatabaseItem.addItem(name, description, category, price,
-                    InetAddress.getLoopbackAddress().getHostAddress()+"/files/"+ imgFile.getOriginalFilename(),
+                    InetAddress.getLoopbackAddress().getHostAddress()+"item/files/"+ imgFile.getOriginalFilename(),
                     DatabaseUser.getUser(tokenId));
         } catch (UserNotFoundException e) {
             return null;
