@@ -18,7 +18,7 @@ public class DatabaseUser {
         return DB_USER;
     }
 
-    public static UserProfile addUser(String name, String email, String password) throws EmailAlreadyExistsException {
+    public static User addUser(String name, String email, String password) throws EmailAlreadyExistsException {
         boolean duplicateEmail = false;
         if(!DB_USER_AUTH.isEmpty()){
             for(UserAuth fAuth: DB_USER_AUTH){
@@ -28,9 +28,7 @@ public class DatabaseUser {
                 }
             }
         }
-
         if(!duplicateEmail){
-
             //generate userId and check if there is already same userId;
             String userId;
             boolean duplicateId;
@@ -47,11 +45,9 @@ public class DatabaseUser {
             } while(duplicateId);
             UserProfile user = new UserProfile(userId, name);
             DB_USER.add(user);
-            DB_USER_AUTH.add(
-                    new UserAuth(EncryptData.generateToken(userId), email, password)
-            );
-
-            return user;
+            UserAuth auth = new UserAuth(EncryptData.generateToken(userId), email, password);
+            DB_USER_AUTH.add(auth);
+            return new User(auth.getAuthId(), user);
         } else {
             throw new EmailAlreadyExistsException(email);
         }

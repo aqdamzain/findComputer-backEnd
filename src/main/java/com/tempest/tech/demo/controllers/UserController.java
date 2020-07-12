@@ -44,7 +44,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public UserProfile registerUser(@RequestParam(value="name") String name,
+    public User registerUser(@RequestParam(value="name") String name,
                                  @RequestParam(value="email") String email,
                                  @RequestParam(value="password") String password)
     {
