@@ -10,12 +10,12 @@
 * [Create and Manage Item](#create-and-manage-item)
   * GET item
   * POST item/insert
-  * GET item/{id}
+  * GET item/id/{id}
   * POST item/user
   * DELETE item/{id}/delete
   * POST item/{id}/buy
   * POST item/buy/user
-  * POST item/search
+  * POST item/{category}
 
 ## Create and Manage User
 
@@ -142,11 +142,11 @@ response body:
 }
 ```
 
-### GET item/{id}
+### GET item/id/{id}
 take parameters of
 * id : String value of id of the item.
 ```sh
-example: GET /item/efa59eed958e7c315ba376368a67745754****
+example: GET /item/id/efa59eed958e7c315ba376368a67745754****
 ```
 will return item information
 ```sh
@@ -301,12 +301,12 @@ response body:
 ]
 ```
 
-### POST item/search
+### POST item/{category}
 get item by the category.  
 take parameters of
 * category : String value of item category
 ```sh
-example: POST /item/search?category=value
+example: POST /item/processor
 ```
 will return information of all items in the same category
 ```sh

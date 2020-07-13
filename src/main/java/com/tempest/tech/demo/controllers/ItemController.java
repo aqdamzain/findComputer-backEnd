@@ -65,21 +65,21 @@ public class ItemController {
         return DatabaseItem.getItemByUser(tokenId);
     }
 
-    @RequestMapping("/{id}")
+    @RequestMapping("/id/{id}")
     public Item getItem(@PathVariable String id){
         return DatabaseItem.getItemById(id);
     }
 
     @RequestMapping(value = "/{id}/delete", method = RequestMethod.DELETE)
     public Item deleteItem(@RequestParam(value = "tokenId") String tokenId,
-                           @PathVariable String id)
+                           @PathVariable("id") String id)
     {
         return DatabaseItem.removeItem(tokenId, id);
     }
 
     @RequestMapping(value = "/{id}/buy", method = RequestMethod.POST)
     public ItemLog buyItem(@RequestParam(value = "tokenId") String tokenId,
-                           @PathVariable String id)
+                           @PathVariable("id") String id)
     {
         try {
             return DatabaseItem.buyItem(tokenId, id);
@@ -94,7 +94,7 @@ public class ItemController {
     }
 
     @RequestMapping("/{category}")
-    public ArrayList<Item> getItemsByCategory(@PathVariable String category){
+    public ArrayList<Item> getItemsByCategory(@PathVariable("category") String category){
         return DatabaseItem.searchByCategory(category);
     }
 
