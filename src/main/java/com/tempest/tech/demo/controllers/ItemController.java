@@ -93,8 +93,8 @@ public class ItemController {
         return DatabaseItem.getBuyHistoryByUser(tokenId);
     }
 
-    @RequestMapping(value = "/search", method = RequestMethod.POST)
-    public ArrayList<Item> getItemsByCategory(@RequestParam(value = "category") String category){
+    @RequestMapping("/{category}")
+    public ArrayList<Item> getItemsByCategory(@PathVariable String category){
         return DatabaseItem.searchByCategory(category);
     }
 
